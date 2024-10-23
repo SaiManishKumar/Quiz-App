@@ -61,7 +61,7 @@ function initApp() {
         70,
         questions);
 
-    // questions.map(q => quiz.addQuestion(q.title, q.options));
+
 
     new QuizElementsHelper(app, quizCard, questionsCard, resultCard, quiz);
 }
