@@ -1,14 +1,7 @@
 "use strict";
 
 class QuizElementsHelper {
-  /**
-   *
-   * @param app {Element} - the element of the whole app
-   * @param quizCard {Element} - the wrapper of the quiz details
-   * @param questionCard {Element} - the wrapper of the questions card
-   * @param resultCard {Element} - the wrapper of the result card
-   * @param quiz {Quiz} - an instance of the Quiz class
-   */
+ 
   constructor(app, quizCard, questionCard, resultCard, quiz) {
     this.app = app;
     this.quiz = quiz;
@@ -26,9 +19,7 @@ class QuizElementsHelper {
     this.showQuizCard();
   }
 
-  /**
-   * find the inner elements of each card and assign to it.
-   */
+
   assignElements() {
     // Quiz Card Elements
     this.quizCard.startBtn = this.quizCard.querySelector(
@@ -47,7 +38,6 @@ class QuizElementsHelper {
       ".quiz-details__meta.--t strong"
     );
 
-    // Question Card Elements
     this.questionCard.progressRemainingTimeElm = document.querySelector(
       ".questions-card__remaining-time"
     );
@@ -80,9 +70,7 @@ class QuizElementsHelper {
     this.resultCard.scoreElm = this.resultCard.querySelector("#score");
   }
 
-  /**
-   * initialize the required listeners of the elements
-   */
+ 
   initListeners() {
     this.quizCard.startBtn.addEventListener(
       "click",
@@ -102,9 +90,7 @@ class QuizElementsHelper {
     );
   }
 
-  /**
-   * Show the details card of the quiz
-   */
+
   showQuizCard() {
     this.quizCard.titleElm.innerText = this.quiz.title;
     this.quizCard.descriptionElm.innerText = this.quiz.description;
@@ -114,16 +100,11 @@ class QuizElementsHelper {
     this.quizCard.classList.add("show");
   }
 
-  /**
-   * hide the quiz card
-   */
   hideQuizCard() {
     this.quizCard.classList.remove("show");
   }
 
-  /**
-   * Show the question card
-   */
+
   showQuestionsCard() {
     this.hideQuizCard();
 
@@ -133,17 +114,11 @@ class QuizElementsHelper {
     this.startQuiz();
   }
 
-  /**
-   * hide the question card
-   */
   hideQuestionsCard() {
     this.questionCard.classList.remove("show");
   }
 
-  /**
-   * Handle the visibility of the result card
-   * @param result - the object of quiz result thet contains score property
-   */
+
   showResultCard(result) {
     this.hideQuestionsCard();
 
@@ -153,17 +128,12 @@ class QuizElementsHelper {
     this.resultCard.classList.add("show");
   }
 
-  /**
-   * hide the result card
-   */
+
   hideResultCard() {
     this.resultCard.classList.remove("show");
     this.showQuizCard();
   }
 
-  /**
-   * Handle the starting of the quiz and control the status of it.
-   */
   startQuiz() {
     this.resetPreviousQuiz();
     this.quiz.reset();
@@ -177,11 +147,6 @@ class QuizElementsHelper {
     this._setProgressTicker();
   }
 
-  /**
-   * initialize the quiz time progress on every time that quiz starts
-   * to control the progressbar and remaining time
-   * @private
-   */
   _setProgressTicker() {
     this.remainingTimeInterval = setInterval(() => {
       const qTime = this.quiz.timeDetails;
@@ -206,10 +171,7 @@ class QuizElementsHelper {
     }, 1000);
   }
 
-  /**
-   * this method putting the question in the question card
-   * @param question - the object of the question that received from this.quiz
-   */
+
   parseNextQuestion(question) {
     const selectedOption = document.querySelector(
       "input[name=question-option]:checked"
@@ -244,9 +206,7 @@ class QuizElementsHelper {
     this.questionCard.progressbarElm.style.width = "100%";
   }
 
-  /**
-   * this will call when next button clicked
-   */
+  
   nextBtnHandler() {
     const selectedOption = document.querySelector(
       "input[name=question-option]:checked"
@@ -266,9 +226,7 @@ class QuizElementsHelper {
     }
   }
 
-  /**
-   * this will call when stop button clicked
-   */
+  
   stopBtnHandler() {
     this.resetPreviousQuiz();
     this.showResultCard();
